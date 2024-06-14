@@ -21,8 +21,15 @@ class DeviceDriver:
 
     def read(self, address: int) -> int:
         # TODO: implement this method
-        value = self.__device.read(address)
+        value = self.read_five_times(address)
+
         for i in range(5):
-            if value != self.__device.read(address):
-                raise Exception("Read Fail Exception")
+            if value[0] != value[i]:
+                raise Exception
+        return value[0]
+
+    def read_five_times(self, address):
+        value = []
+        for i in range(5):
+            value.append(self.__device.read(address))
         return value
